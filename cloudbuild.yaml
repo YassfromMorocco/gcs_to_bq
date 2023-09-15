@@ -1,15 +1,15 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-args:
-  - functions
-  - deploy
-  - hello_world
-  - --gen2
-  - --runtime=python310
-  - --region=europe-west1
-  - --source=.
-  - --entry-point=main.py
-  - --trigger-event=google.storage.object.finalize
-  - --trigger-resource=europe-west1
-  - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
-  - --trigger-location=us
+  args:
+    - functions
+    - deploy
+    - hello_world
+    - --gen2
+    - --runtime=python310
+    - --region=europe-west1
+    - --source=.
+    - --entry-point=main.py
+    - --trigger-event=google.storage.object.finalize
+    - --trigger-resource=europe-west1
+    - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
+    - --trigger-location=us
