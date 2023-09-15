@@ -12,4 +12,4 @@ steps:
     - --trigger-event=google.storage.object.finalize
     - --trigger-resource=poc_landing_zone
     - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
-    - --trigger-location=us
+    - --trigger-location=eu
