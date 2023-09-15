@@ -6,6 +6,6 @@ steps:
   - hello_world
   - --source=.
   - --trigger-http
-  - --runtime=python37
+  - --runtime=python311
   - --allow-unauthenticated
   
