@@ -10,6 +10,6 @@ steps:
     - --source=.
     - --entry-point=main.py
     - --trigger-event=google.storage.object.finalize
-    - --trigger-resource=europe-west1
-    - --run-service-account=cloud-function-sa@dbt-for-bigquery-377112.iam.gserviceaccount.com
+    - --trigger-resource=poc_landing_zone
+    - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
     - --trigger-location=us
