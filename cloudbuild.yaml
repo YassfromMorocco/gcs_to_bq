@@ -1,15 +1,11 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
-    - functions
-    - deploy
-    - hello_world
-    - --gen2
-    - --runtime=python310
-    - --region=europe-west1
-    - --source=.
-    - --entry-point=main.py
-    - --trigger-event=google.storage.object.finalize
-    - --trigger-resource=poc_landing_zone
-    - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
-    - --trigger-location=eu
+  - gcloud
+  - functions
+  - deploy
+  - gcs-to-bq
+  - --region=europe-west1
+  - --source=.
+  - --trigger-http
+  - --runtime=python310
