@@ -14,5 +14,6 @@ steps:
   - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
   - --entry-point=main
   - --trigger-bucket=poc_landing_zone
+  - --trigger-event=google.storage.object.finalize
   - --quiet
   
