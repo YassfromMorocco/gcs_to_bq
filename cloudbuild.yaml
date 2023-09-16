@@ -7,8 +7,11 @@ steps:
   - hello_world
   - --region=europe-west1
   - --source=.
-  - --trigger-bucket=poc_landing_zone
   - --runtime=python310
   - --timeout=540
+  - --memory=512MB
   - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
   - --entry-point=main
+  - --trigger-event=google.storage.object.finalize
+  - --trigger-resource=europe-west1
+  - --trigger-bucket=poc_landing_zone
