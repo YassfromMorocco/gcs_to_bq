@@ -11,5 +11,5 @@ steps:
   - --runtime=python310
   - --entry-point=hello_world
   - --trigger-bucket=poc_landing_zone
-  - --trigger-location=europe-west1
+  - --trigger-location=eu
   
