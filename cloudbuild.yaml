@@ -9,3 +9,4 @@ steps:
   - --source=.
   - --trigger-http
   - --runtime=python310
+  - --trigger-event=google.storage.object.finalize
