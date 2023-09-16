@@ -10,5 +10,6 @@ steps:
   - --runtime=python310
   - --entry-point=main.py
   - --trigger-event=google.storage.object.finalize
+  - --trigger-bucket=poc_landing_zone
   - --trigger-resource=europe-west1
   - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
