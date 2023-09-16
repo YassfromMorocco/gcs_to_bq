@@ -10,6 +10,6 @@ steps:
   - --source=.
   - --runtime=python310
   - --entry-point=hello_world
-  - --trigger-event-filters="type=google.cloud.storage.object.v1.finalized"
-  - --trigger-event-filters="bucket=poc_landing_zone"
+  - --trigger-bucket=bucket=poc_landing_zone
   - --trigger-location=europe-west1
+  
