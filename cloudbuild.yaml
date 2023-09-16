@@ -13,4 +13,6 @@ steps:
   - --memory=512MB
   - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
   - --entry-point=main
-
+  - --trigger-bucket=poc_landing_zone
+  - --quiet
+  
