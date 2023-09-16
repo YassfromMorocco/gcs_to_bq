@@ -5,8 +5,11 @@ steps:
   - functions
   - deploy
   - hello_world
+  - --gen2
   - --region=europe-west1
   - --source=.
   - --runtime=python310
-  - --trigger-bucket=poc_landing_zone
-  - --trigger-event=google.storage.object.finalize
+  - --entry-point=hello_world
+  - --trigger-event-filters="type=google.cloud.storage.object.v1.finalized"
+  - --trigger-event-filters="bucket=poc_landing_zone"
+  - --trigger-location=europe-west1
