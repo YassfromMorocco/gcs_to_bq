@@ -8,9 +8,9 @@ steps:
   - --region=europe-west1
   - --source=.
   - --runtime=python310
+  - --trigger-http
   - --timeout=540
   - --memory=512MB
   - --run-service-account=1064256876210-compute@developer.gserviceaccount.com
   - --entry-point=main
-
 
