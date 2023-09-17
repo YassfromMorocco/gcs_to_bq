@@ -8,9 +8,9 @@ steps:
   - --gen2
   - --region=europe-west1
   - --source=.
-  - --runtime=python310
+  - --runtime=python311
   - --memory=512MB
-  - --entry-point=hello_world
+  - --entry-point=hello_gcs
   - --trigger-bucket=poc_landing_zone
   - --trigger-location=eu
   
