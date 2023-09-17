@@ -1,6 +1,7 @@
 import functions_framework
 from utils import needs_to_be_processed
 from config import BUCKET_NAME
+from ingestion import run_cockpit_sfr_data_ingestion
 # Triggered by a change in a storage bucket
 @functions_framework.cloud_event
 def hello_gcs(cloud_event):
@@ -36,3 +37,4 @@ def hello_gcs(cloud_event):
     else:
         if bucket == BUCKET_NAME:
             print(f" The file {name} will be processed")
+            run_cockpit_sfr_data_ingestion(name, bucket)
