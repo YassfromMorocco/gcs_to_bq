@@ -10,7 +10,6 @@ steps:
   - --source=.
   - --runtime=python310
   - --memory=512MB
-  - --max-instances=10
   - --entry-point=hello_world
   - --trigger-bucket=poc_landing_zone
   - --trigger-location=eu
