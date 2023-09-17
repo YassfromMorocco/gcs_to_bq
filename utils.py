@@ -20,6 +20,7 @@ def get_schema_from_dict(file_name: str, bucket_name: str):
     """Function to get the schema from the file name"""
     print(f" FileName to get the schema from {file_name}")
     for key in source_keys:
-        if re.match(key, file_name):
+        print(f" key is {schema_name}; filename is {file_name}")
+        if re.search(key, file_name):
             schema_name = key
             print(f" Schema {schema_name} found for the file {file_name}")
