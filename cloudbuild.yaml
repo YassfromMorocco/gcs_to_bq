@@ -9,6 +9,7 @@ steps:
   - --region=europe-west1
   - --source=.
   - --runtime=python310
+  - --memory=512MB
   - --entry-point=hello_world
   - --trigger-bucket=poc_landing_zone
   - --trigger-location=eu
