@@ -1,4 +1,3 @@
-from config import SOURCES
 from utils import get_schema_from_dict
 import os
 

@@ -46,15 +46,17 @@ def get_schema_from_dict(file_name: str, bucket_name: str, path_name: str):
 def move_data_in_blob(source_bucket_name: str, blob_name: str,
                       target_bucket_name: str, new_blob_name: str):
     """
-    Function for moving files between directories or buckets. it will use GCP's copy
-    function then delete the blob from the old location.
+    Function for moving files between directories or buckets.
+    it will use GCP's copy function then delete the blob 
+    from the old location.
 
     Parameters
     -----
     source_bucket_name: name of bucket
     blob_name: str, name of file
         ex. 'data/some_location/path_name'
-    target_bucket_name: name of bucket (can be same as original if we're just moving around directories)
+    target_bucket_name: name of bucket 
+    (can be same as original if we're just moving around directories)
     new_blob_name: str, name of file in new directory in target bucket
         ex. 'data/destination/path_name'
     """
