@@ -8,6 +8,7 @@ source_keys = list(SOURCES.keys())
 STORAGE_CLIENT = storage.Client(PROJECT_ID)
 BIGQUERY_CLIENT = bigquery.Client(PROJECT_ID)
 
+
 def needs_to_be_processed(path_name: str):
     """Python function to check if the file needs to be processed"""
     if re.search("processed", path_name):
@@ -41,6 +42,7 @@ def get_schema_from_dict(file_name: str, bucket_name: str, path_name: str):
             )
     return schema_name, schema
 
+
 def move_data_in_blob(source_bucket_name: str, blob_name: str, target_bucket_name: str, new_blob_name: str):
     """
     Function for moving files between directories or buckets. it will use GCP's copy
@@ -63,4 +65,4 @@ def move_data_in_blob(source_bucket_name: str, blob_name: str, target_bucket_nam
     source_bucket.copy_blob(source_blob, destination_bucket, new_blob_name)
     # delete in old destination
     source_blob.delete()
-    logger.info(f"File moved from {source_blob} to {new_blob_name}")
+    print(f"File moved from {source_blob} to {new_blob_name}")
