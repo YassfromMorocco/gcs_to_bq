@@ -19,6 +19,7 @@ def needs_to_be_processed(path_name: str):
 def get_schema_from_dict(file_name: str, bucket_name: str):
     """Function to get the schema from the file name"""
     print(f" FileName to get the schema from {file_name}")
+    print(f" source key are {source_keys}")
     for key in source_keys:
         print(f" key is {key}; filename is {file_name}")
         if re.search(key, file_name):
