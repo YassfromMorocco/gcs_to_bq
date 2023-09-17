@@ -5,8 +5,8 @@ from google.cloud import bigquery, storage
 source_keys = list(SOURCES.keys())
 
 # initialise the storage client and bigquery client
-STORAGE_CLIENT = storage.Client(PROJECT_ID)
-BIGQUERY_CLIENT = bigquery.Client(PROJECT_ID)
+#STORAGE_CLIENT = storage.Client(PROJECT_ID)
+#BIGQUERY_CLIENT = bigquery.Client(PROJECT_ID)
 
 
 def needs_to_be_processed(path_name: str):
@@ -34,12 +34,12 @@ def get_schema_from_dict(file_name: str, bucket_name: str, path_name: str):
             break
         else:
             print(f"no schema found for {file_name}, moving to 'rejected/'")
-            move_data_in_blob(
-                source_bucket_name=bucket_name,
-                blob_name=path_name,
-                target_bucket_name=bucket_name,
-                new_blob_name=f"rejected/{path_name}",
-                )
+            #move_data_in_blob(
+            #    source_bucket_name=bucket_name,
+            #    blob_name=path_name,
+            #    target_bucket_name=bucket_name,
+            #    new_blob_name=f"rejected/{path_name}",
+            #    )
     return schema_name, schema
 
 
