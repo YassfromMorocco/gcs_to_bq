@@ -113,7 +113,6 @@ def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
         bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
     ]
-    table_id = "dbt-for-bigquery-377112.00_raw_cms.hvdn"
     table = bigquery.Table(table_id, schema=schema)
     table = bigquery_client.create_table(table)  # Make an API request.
     print(
