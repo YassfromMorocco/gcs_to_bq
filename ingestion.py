@@ -1,12 +1,5 @@
 from utils import get_schema_from_dict
 import os
-from google.cloud import storage
-
-# Instantiates a client
-storage_client = storage.Client()
-
-# The name for the new bucket
-bucket_name = "my-new-bucket"
 
 
 def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
@@ -19,7 +12,4 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
                                                bucket_name=bucket,
                                                path_name=path_name)
     print(f" Schema {schema_name} found for the file {file_name}")
-    # Creates the new bucket
-    bucket = storage_client.create_bucket(bucket_name)
 
-    print(f"Bucket {bucket.name} created.")
