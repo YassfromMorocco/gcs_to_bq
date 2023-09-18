@@ -1,13 +1,14 @@
 import re
-from config import PROJECT_ID, BQ_SCHEMAS_MAPPING, BQ_TABLE_MAPPING, DATASET_MAPPING
+from config import (PROJECT_ID, BQ_SCHEMAS_MAPPING, BQ_TABLE_MAPPING,
+                    DATASET_MAPPING)
 from google.cloud import storage, bigquery
 
 schema_keys = list(BQ_SCHEMAS_MAPPING.keys())
 table_keys = list(BQ_TABLE_MAPPING.keys())
 data_set_keys = list(DATASET_MAPPING.keys())
 
-storage_client = storage.Client(project=PROJECT_ID)
-bigquery_client = bigquery.Client(project=PROJECT_ID)
+storage_client = storage.Client()
+bigquery_client = bigquery.Client()
 
 
 def needs_to_be_processed(path_name: str):
@@ -92,9 +93,7 @@ def generate_table_id(table_name: str, dataset_name: str):
     return f"{PROJECT_ID}.{dataset_name}.{table_name}"
 
 
-def create_bq_table(
-    table_id: str, schema: str, exists_ok: bool = True
-):
+def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
     """
     A function to create a new BigQuery table if it doesn't exist.
     If exists_ok is not set, defaults to True. This will mean the table will not be created if it exists, but no error will be thrown
@@ -105,3 +104,10 @@ def create_bq_table(
     ]
 
     """
+    table = bigquery.Table(table_id, schema=schema)
+    table = bigquery_client.create_table(table=table, exists_ok=exists_ok)  # Make an API request.
+    print(
+        "Created table {}.{}.{}".format(table.project,
+                                        table.dataset_id,
+                                        table.table_id)
+    )
