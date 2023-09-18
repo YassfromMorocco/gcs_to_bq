@@ -106,13 +106,9 @@ def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
     ]
 
     """
-    # table = bigquery.Table(table_id, schema=schema)
-    # Make an API request.
-    # table = bigquery_client.create_table(table=table, exists_ok=exists_ok)   
     
-
     table = bigquery.Table(table_id, schema=schema)
-    table = bigquery_client.create_table(table)  # Make an API request.
+    table = bigquery_client.create_table(table, exists_ok=exists_ok)  # Make an API request.
     print(
         "Created table {}.{}.{}".format(table.project, table.dataset_id,
                                         table.table_id)
