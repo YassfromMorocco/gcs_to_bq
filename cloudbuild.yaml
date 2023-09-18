@@ -14,4 +14,6 @@ steps:
   - --entry-point=hello_gcs
   - --trigger-bucket=poc_landing_zone
   - --trigger-location=eu
+  - --run-service-account=cloud-function-etl-from-gcs@dbt-for-bigquery-377112.iam.gserviceaccount.com
+  - --trigger-service-account=cloud-function-etl-from-gcs@dbt-for-bigquery-377112.iam.gserviceaccount.com
   
