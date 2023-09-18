@@ -125,7 +125,7 @@ def create_bq_job_config(file_name: str = None):
         job_config.source_format = bigquery.SourceFormat.CSV
         job_config.skip_leading_rows = 1
         job_config.max_bad_records = 50
-        job_config.field_delimiter = ","
+        job_config.field_delimiter = "|"
         return job_config
     except Exception as e:
         raise Exception(f"There was an error: {e}")
