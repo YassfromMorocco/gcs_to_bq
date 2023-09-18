@@ -2,7 +2,9 @@ from utils import (get_schema_from_dict,
                    get_table_name_from_dict,
                    get_dataset_name_from_table,
                    generate_table_id,
-                   create_bq_table)
+                   refresh_bq_table,
+                   create_bq_job_config,
+                   write_to_bq_using_uri)
 import os
 
 
@@ -28,4 +30,10 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
     table_id = generate_table_id(table_name, dataset_name)
     print(f"table_id is {table_id}")
 
-    create_bq_table(table_id=table_id, schema=schema)
+    refresh_bq_table(table_id=table_id, schema=schema)
+    
+    job_config = create_bq_job_config(file_name)
+    print(f"job config is {job_config}")
+    
+    write_to_bq_using_uri(path_name=file_name, bucket=bucket,
+                          table=table_name, job_config=job_config)

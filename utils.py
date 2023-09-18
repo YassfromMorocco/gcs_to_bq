@@ -93,7 +93,7 @@ def generate_table_id(table_name: str, dataset_name: str):
     return f"{PROJECT_ID}.{dataset_name}.{table_name}"
 
 
-def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
+def refresh_bq_table(table_id: str, schema: str, exists_ok: bool = True):
     """
     A function to create a new BigQuery table if it doesn't exist.
     If exists_ok is not set, defaults to True. 
@@ -108,8 +108,46 @@ def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
     """
     
     table = bigquery.Table(table_id, schema=schema)
-    table = bigquery_client.create_table(table, exists_ok=exists_ok)  # Make an API request.
+    # Make an API request.
+    table = bigquery_client.create_table(table, exists_ok=exists_ok)
     print(
         "Created table {}.{}.{}".format(table.project, table.dataset_id,
                                         table.table_id)
     )
+
+
+def create_bq_job_config(file_name: str = None):
+    """Python function to generate the job config for bigquery,
+    based on the source incoming"""
+    print(f"Generating the job config for {file_name}")
+    try:
+        job_config = bigquery.LoadJobConfig()
+        job_config.source_format = bigquery.SourceFormat.CSV
+        job_config.skip_leading_rows = 1
+        job_config.max_bad_records = 50
+        job_config.field_delimiter = ","
+        return job_config
+    except Exception as e:
+        raise Exception(f"There was an error: {e}")
+
+
+def write_to_bq_using_uri(
+                            path_name: str,
+                            table: str,
+                            bucket: str,
+                            job_config: str,
+                            ):
+    """"""
+    # Instantiate the bqclient used to move the data
+    bqclient = bigquery.Client(PROJECT_ID)
+   
+    try:
+        write_job = bqclient.load_table_from_uri(
+            source_uris=f"gs://{bucket}/{path_name}", destination=table,
+            project=PROJECT_ID, job_config=job_config
+        )
+        write_job.result()
+        return True
+    
+    except Exception as write_error:
+        print(f"There was an issue {write_error} during write to bq step")
