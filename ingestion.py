@@ -36,4 +36,4 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
     print(f"job config is {job_config}")
     
     write_to_bq_using_uri(path_name=file_name, bucket=bucket,
-                          table=table_name, job_config=job_config)
+                          table=table_id, job_config=job_config)
