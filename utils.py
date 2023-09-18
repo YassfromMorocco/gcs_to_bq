@@ -144,7 +144,7 @@ def write_to_bq_using_uri(
    
     try:
         write_job = bqclient.load_table_from_uri(
-            source_uris=f"gs://{bucket}/{path_name}.{file_extension}",
+            source_uris=f"gs://{bucket}/{path_name}{file_extension}",
             destination=table, project=PROJECT_ID, job_config=job_config
         )
         write_job.result()
