@@ -1,4 +1,4 @@
-from utils import get_schema_from_dict
+from utils import get_schema_from_dict, generate_seuk_hourly_data_table_name
 import os
 
 
@@ -12,4 +12,5 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
                                                bucket_name=bucket,
                                                path_name=path_name)
     print(f" Schema {schema_name} found for the file {file_name}")
-
+    try:
+        table_name = generate_seuk_hourly_data_table_name(f"{schema_name}")

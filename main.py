@@ -39,4 +39,3 @@ def hello_gcs(cloud_event):
         if bucket == BUCKET_NAME:
             print(f" The file {name} will be processed")
             run_cockpit_sfr_data_ingestion(name, bucket)
-

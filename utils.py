@@ -1,8 +1,9 @@
 import re
-from config import SOURCES
+from config import SOURCES, BQ_SEUK_HOURLY_TABLE_MAPPING
 from google.cloud import storage
 
 source_keys = list(SOURCES.keys())
+schema_keys = list(BQ_SEUK_HOURLY_TABLE_MAPPING.keys())
 
 storage_client = storage.Client()
 
@@ -65,3 +66,12 @@ def move_data_in_blob(source_bucket_name: str, blob_name: str,
     # delete in old destination
     source_blob.delete()
     print(f"File moved from {source_blob} to {new_blob_name}")
+
+
+def generate_data_table_name(schema_name: str):
+    """Python function to create the table structure for PII tables"""
+    for key in schema_keys:
+        if re.search(schema_name, key):
+            table_name = BQ_SEUK_HOURLY_TABLE_MAPPING.get(schema_name, None)
+            break
+    return table_name

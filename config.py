@@ -7,3 +7,7 @@ SOURCES = {
     "hvdn_schema": schema.hvdn_schema,
     "test_schema": schema.test_schema
 }
+
+BQ_SEUK_HOURLY_TABLE_MAPPING = {
+    "hvdn_schema": "hvdn",
+}
