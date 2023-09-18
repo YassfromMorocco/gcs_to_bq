@@ -27,4 +27,4 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
     table_id = generate_table_id(table_name, dataset_name)
     print(f"table_id is {table_id}")
 
-    create_bq_table(table_id=table_id, schema=schema_name)
+    create_bq_table(table_id=table_id, schema=schema)
