@@ -96,7 +96,9 @@ def generate_table_id(table_name: str, dataset_name: str):
 def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
     """
     A function to create a new BigQuery table if it doesn't exist.
-    If exists_ok is not set, defaults to True. This will mean the table will not be created if it exists, but no error will be thrown
+    If exists_ok is not set, defaults to True. 
+    This will mean the table will not be created if it exists, 
+    but no error will be thrown
 
     schema = [
         bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
@@ -105,7 +107,8 @@ def create_bq_table(table_id: str, schema: str, exists_ok: bool = True):
 
     """
     table = bigquery.Table(table_id, schema=schema)
-    table = bigquery_client.create_table(table=table, exists_ok=exists_ok)  # Make an API request.
+    # Make an API request.
+    table = bigquery_client.create_table(table=table, exists_ok=exists_ok)  
     print(
         "Created table {}.{}.{}".format(table.project,
                                         table.dataset_id,
