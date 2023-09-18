@@ -1,11 +1,7 @@
 from google.cloud import bigquery
 
-hvdn_schema = [
-    bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
-    bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
-]
 
-hvdn_schema_2 = [
+hvdn_schema = [
     bigquery.SchemaField('IdHvdn', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('ID', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('SOURCEACD', 'INT64', mode='NULLABLE'),
