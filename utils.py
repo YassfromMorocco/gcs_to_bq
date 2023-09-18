@@ -1,11 +1,13 @@
 import re
-from config import SOURCES, BQ_SEUK_HOURLY_TABLE_MAPPING
-from google.cloud import storage
+from config import PROJECT_ID, BQ_SCHEMAS_MAPPING, BQ_TABLE_MAPPING, DATASET_MAPPING
+from google.cloud import storage, bigquery
 
-source_keys = list(SOURCES.keys())
-schema_keys = list(BQ_SEUK_HOURLY_TABLE_MAPPING.keys())
+schema_keys = list(BQ_SCHEMAS_MAPPING.keys())
+table_keys = list(BQ_TABLE_MAPPING.keys())
+data_set_keys = list(DATASET_MAPPING.keys())
 
-storage_client = storage.Client()
+storage_client = storage.Client(project=PROJECT_ID)
+bigquery_client = bigquery.Client(project=PROJECT_ID)
 
 
 def needs_to_be_processed(path_name: str):
@@ -23,12 +25,12 @@ def needs_to_be_processed(path_name: str):
 def get_schema_from_dict(file_name: str, bucket_name: str, path_name: str):
     """Function to get the schema from the file name"""
     print(f" FileName to get the schema from {file_name}")
-    print(f" source key are {source_keys}")
-    for key in source_keys:
+    print(f" source key are {schema_keys}")
+    for key in schema_keys:
         print(f" key is {key}; filename is {file_name}")
         if re.search(file_name, key):
             schema_name = key
-            schema = SOURCES.get(schema_name, None)
+            schema = BQ_SCHEMAS_MAPPING.get(schema_name, None)
             break
         else:
             print(f"no schema found for {file_name}, moving to 'rejected/'")
@@ -68,10 +70,38 @@ def move_data_in_blob(source_bucket_name: str, blob_name: str,
     print(f"File moved from {source_blob} to {new_blob_name}")
 
 
-def generate_data_table_name(schema_name: str):
+def get_table_name_from_dict(schema_name: str):
     """Python function to create the table structure for PII tables"""
     for key in schema_keys:
         if re.search(schema_name, key):
-            table_name = BQ_SEUK_HOURLY_TABLE_MAPPING.get(schema_name, None)
+            table_name = BQ_TABLE_MAPPING.get(schema_name, None)
             break
     return table_name
+
+
+def get_dataset_name_from_table(table_name: str):
+    """Python function to create the table structure for PII tables"""
+    for key in schema_keys:
+        if re.search(table_name, key):
+            table_name = DATASET_MAPPING.get(table_name, None)
+            break
+    return table_name
+
+
+def generate_table_id(table_name: str, dataset_name: str):
+    return f"{PROJECT_ID}.{dataset_name}.{table_name}"
+
+
+def create_bq_table(
+    table_id: str, schema: str, exists_ok: bool = True
+):
+    """
+    A function to create a new BigQuery table if it doesn't exist.
+    If exists_ok is not set, defaults to True. This will mean the table will not be created if it exists, but no error will be thrown
+
+    schema = [
+        bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
+    ]
+
+    """

@@ -1,6 +1,8 @@
 import schema
-import re
-from utils import generate_data_table_name 
+from utils import (get_table_name_from_dict,
+                   get_dataset_name_from_table,
+                   generate_table_id)
+
 file_name = "hvdn"
 
 SOURCES = {
@@ -13,17 +15,13 @@ source_keys = list(SOURCES.keys())
 print(source_keys)
 
 
-for key in source_keys:
-    print(f" key is {key}, file_name is {file_name}")
-    if re.search(file_name, key):
-        schema_name = key
-        print(f" Schema {schema_name} found for the file {file_name}")
-        schema = SOURCES.get(schema_name, None)
-        print(f" Schema is {schema_name} ")
-        break
-    else:
-        print(f"no schema found for {file_name}, moving to 'rejected/'")
+schema_name = "hvdn_schema"
 
-
-table_name = generate_data_table_name(schema_name)
+table_name = get_table_name_from_dict(schema_name)
 print(f"table name is {table_name}")
+
+dataset_name = get_dataset_name_from_table(table_name)
+print(f"datset name is {dataset_name}")
+
+table_id = generate_table_id(table_name, dataset_name)
+print(f"table_id is {table_id}")

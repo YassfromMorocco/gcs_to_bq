@@ -1,4 +1,7 @@
-from utils import get_schema_from_dict, generate_seuk_hourly_data_table_name
+from utils import (get_schema_from_dict,
+                   get_table_name_from_dict,
+                   get_dataset_name_from_table,
+                   generate_table_id)
 import os
 
 
@@ -12,5 +15,12 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
                                                bucket_name=bucket,
                                                path_name=path_name)
     print(f" Schema {schema_name} found for the file {file_name}")
-    try:
-        table_name = generate_seuk_hourly_data_table_name(f"{schema_name}")
+    
+    table_name = get_table_name_from_dict(f"{schema_name}")
+    print(f"Table name is  {table_name}")
+    
+    dataset_name = get_dataset_name_from_table(table_name)
+    print(f"datset name is {dataset_name}")
+    
+    table_id = generate_table_id(table_name, dataset_name)
+    print(f"table_id is {table_id}")
