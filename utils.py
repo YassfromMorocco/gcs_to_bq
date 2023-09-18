@@ -24,7 +24,6 @@ def get_schema_from_dict(file_name: str, bucket_name: str, path_name: str):
         print(f" key is {key}; filename is {file_name}")
         if re.search(file_name, key):
             schema_name = key
-            print(f" Schema {schema_name} found for the file {file_name}")
             schema = SOURCES.get(schema_name, None)
             break
         else:
