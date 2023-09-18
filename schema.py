@@ -124,12 +124,12 @@ hvdn_schema_2 = [
     bigquery.SchemaField('SCAN', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('INTERVAL15', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('INTERVAL15_ACD', 'INT64', mode='NULLABLE'),
-    bigquery.SchemaField('CLEANSING', 'INT64', mode='NULLABLE')
+    bigquery.SchemaField('CLEANSING', 'INT64', mode='NULLABLE'),
 ]
 
 test_schema = [
     bigquery.SchemaField('IdHvdn', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('ID', 'INT64', mode='NULLABLE'),
     bigquery.SchemaField('SOURCEACD', 'INT64', mode='NULLABLE'),
-    bigquery.SchemaField('row_date', 'STRING', mode='NULLABLE')
+    bigquery.SchemaField('row_date', 'STRING', mode='NULLABLE'),
 ]

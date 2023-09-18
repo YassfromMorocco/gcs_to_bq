@@ -17,7 +17,7 @@ def run_cockpit_sfr_data_ingestion(path_name: str, bucket: str):
                                                bucket_name=bucket,
                                                path_name=path_name)
     print(f" Schema {schema_name} found for the file {file_name}")
-    print(f" Schema filed are {schema} for the file {file_name}")
+    print(f" Schema fileds are {schema} for the file {file_name}")
 
     table_name = get_table_name_from_dict(f"{schema_name}")
     print(f"Table name is  {table_name}")
