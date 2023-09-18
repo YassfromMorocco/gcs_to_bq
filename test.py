@@ -1,4 +1,5 @@
 import schema
+from config import BQ_SCHEMAS_MAPPING
 from utils import (get_table_name_from_dict,
                    get_dataset_name_from_table,
                    generate_table_id)
@@ -13,9 +14,9 @@ SOURCES = {
 source_keys = list(SOURCES.keys())
 
 print(source_keys)
-
-
 schema_name = "hvdn_schema"
+schema = BQ_SCHEMAS_MAPPING.get(schema_name, None)
+print(f"schema is {schema}")
 
 table_name = get_table_name_from_dict(schema_name)
 print(f"table name is {table_name}")
